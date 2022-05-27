@@ -51,6 +51,34 @@ res.send({"status":"success","data":data})
     )
 })
 
+app.post("/api/search",(req,res)=>{
+    var getRoute=req.body
+    busModel.find(getRoute,(error,data)=>{
+        if(error)
+        {
+            res.send({"status":"error"})
+        }
+        else
+        {
+            res.send(data)
+        }
+    })
+})
+
+app.post("/api/delete",(req,res)=>{
+    var getId=req.body
+    busModel.findByIdAndRemove(getId,(error,data)=>{
+        if(error)
+        {
+            res.send({"status":"error"})
+        }
+        else
+        {
+            res.send({"status":"success"})
+        }
+    })
+})
+
 app.listen(4004,()=>{
     console.log("server running")
 })
